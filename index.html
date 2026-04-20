@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BOLO GATEWAY - Paseban Dashboard v2.7 Ultimate Pro</title>
+<title>BOLO GATEWAY - Paseban Dashboard v2.5 Final</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -20,6 +20,7 @@
   --accent: #ffffff;
   --success: #27ae60;
   --warning: #f1c40f;
+  --neon-orange: #ff8c00;
 }
 
 [data-theme="light"] {
@@ -31,6 +32,7 @@
   --table-head: #e5e7eb;
   --accent: #000000;
   --success: #2ecc71;
+  --neon-orange: #e67e22;
 }
 
 body {
@@ -50,20 +52,18 @@ body {
   z-index: 1000;
   background: var(--bg-color);
   padding: 20px 0 10px 0;
+  border-bottom: 1px solid transparent;
   transition: all 0.3s ease;
 }
 
 .header-wrapper.scrolled {
   padding: 10px 0;
   border-bottom: 1px solid var(--text-dim);
+  background: var(--bg-color);
   backdrop-filter: blur(10px);
 }
 
-.header-container { display: flex; justify-content: space-between; align-items: flex-start; }
-header { border-left: 5px solid var(--accent); padding-left: 15px; }
-h1 { font-size: 1.3rem; margin: 0; text-transform: uppercase; letter-spacing: 3px; font-weight: 900; }
-
-/* TICKER */
+/* NEWS FLASH TICKER */
 .ticker-wrapper {
   background: var(--panel-bg);
   border-top: 1px solid var(--text-dim);
@@ -77,10 +77,12 @@ h1 { font-size: 1.3rem; margin: 0; text-transform: uppercase; letter-spacing: 3p
 }
 
 .static-logo {
-  position: absolute; left: 0; top: 0; bottom: 0;
-  background: var(--accent); color: var(--bg-color);
-  display: flex; align-items: center; padding: 0 12px;
-  font-weight: 900; font-size: 10px; z-index: 10;
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--accent);
+  color: var(--bg-color);
+  display: flex; align-items: center;
+  padding: 0 12px; font-weight: 900; font-size: 10px; z-index: 10;
   letter-spacing: 1px; box-shadow: 5px 0 15px rgba(0,0,0,0.3);
 }
 
@@ -96,82 +98,102 @@ h1 { font-size: 1.3rem; margin: 0; text-transform: uppercase; letter-spacing: 3p
   100% { transform: translate3d(-100%, 0, 0); }
 }
 
-/* CHEER BOX */
-.cheer-box {
-    background: linear-gradient(90deg, rgba(39,174,96,0.1), rgba(0,0,0,0));
-    border-left: 3px solid var(--success);
-    padding: 12px 15px;
-    margin: 15px 0;
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-transform: uppercase;
-    font-weight: bold;
-    animation: fadeIn 1s ease;
+/* INTERACTIVE BLUEPRINT PANEL - SIZE OPTIMIZED */
+.blueprint-panel {
+  background: #000;
+  border: 1px solid var(--neon-orange);
+  margin-bottom: 20px;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
 }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
-
-/* QUICK STATS CARDS */
-.mini-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 20px; }
-.card { 
-    background: var(--panel-bg); 
-    border: 1px solid var(--text-dim); 
-    padding: 12px; 
-    text-align: center; 
-    cursor: pointer;
-    transition: all 0.3s ease;
+.blueprint-grid {
+  display: flex; 
+  gap: 20px; 
+  align-items: center; 
+  justify-content: center;
+  background-image: radial-gradient(var(--neon-orange) 0.5px, transparent 0.5px);
+  background-size: 15px 15px; 
+  padding: 15px;
 }
-.card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
+
+.mockup-container {
+  width: 120px; 
+  position: relative; 
+  cursor: crosshair;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mockup-container:hover { transform: scale(1.1) rotate(2deg); }
+
+.mockup-container img {
+  width: 100%; filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.5));
+  animation: neonPulse 2s infinite alternate;
+}
+
+@keyframes neonPulse {
+  from { filter: drop-shadow(0 0 10px rgba(255, 140, 0, 0.4)); }
+  to { filter: drop-shadow(0 0 25px rgba(255, 140, 0, 0.8)); }
+}
+
+.spec-item {
+  margin-bottom: 8px; 
+  border-left: 2px solid var(--neon-orange);
+  padding-left: 10px; 
+  cursor: pointer; 
+  transition: all 0.3s ease;
+}
+
+.spec-item:hover {
+  background: rgba(255, 140, 0, 0.1); border-left: 4px solid #fff; padding-left: 15px;
+}
+
+.blueprint-label { font-size: 8px; letter-spacing: 1px; color: #fff; opacity: 0.7; font-family: 'Courier New', monospace; }
+.blueprint-value { display: block; color: var(--neon-orange); font-weight: bold; font-size: 10px; text-transform: uppercase; font-family: 'Courier New', monospace; }
+
+/* NOTIFIKASI POP-UP */
+#lunasNotify {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
+  background: var(--success); color: white; padding: 15px 30px; border-radius: 50px;
+  font-weight: bold; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex; align-items: center; gap: 10px; text-transform: uppercase; font-size: 14px;
+}
+#lunasNotify.show { transform: translateX(-50%) translateY(0); }
+
+.header-container { display: flex; justify-content: space-between; align-items: flex-start; }
+header { border-left: 5px solid var(--accent); padding-left: 15px; }
+h1 { font-size: 1.3rem; margin: 0; text-transform: uppercase; letter-spacing: 3px; font-weight: 900; }
+
+/* DASHBOARD COMPONENTS */
+.mini-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 20px 0; }
+.card { background: var(--panel-bg); border: 1px solid var(--text-dim); padding: 12px; text-align: center; }
 .card-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px; font-weight: bold; }
 .card-value { font-size: 16px; font-weight: 900; font-family: 'Courier New', monospace; }
 
-/* STATS CONTAINER & DONUT */
-.stats-container {
-  display: flex; align-items: center; gap: 20px;
-  background: var(--panel-bg); padding: 20px;
-  border: 2px solid var(--accent); margin-bottom: 20px;
+.stat-panel { background: var(--panel-bg); padding: 20px; border: 2px solid var(--accent); margin-bottom: 20px; font-family: 'Courier New', monospace; }
+.ascii-bar { color: var(--text-main); letter-spacing: 2px; margin: 15px 0; font-size: 1.2rem; }
+
+.motivation-box { 
+    margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.05); 
+    border-left: 3px solid var(--warning); font-size: 12px; text-transform: uppercase; transition: all 0.5s ease;
 }
 
-.donut-chart {
-  width: 90px; height: 90px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  position: relative;
-  background: conic-gradient(var(--success) 0%, var(--table-head) 0%);
-  flex-shrink: 0; transition: background 0.5s ease;
+.motivation-box.update-success { animation: glow-pulse 1.5s infinite; background: rgba(39, 174, 96, 0.1); color: #fff; }
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 5px rgba(39, 174, 96, 0.4); border-color: var(--success); }
+  50% { box-shadow: 0 0 20px rgba(39, 174, 96, 0.8); border-color: #ffffff; }
+  100% { box-shadow: 0 0 5px rgba(39, 174, 96, 0.4); border-color: var(--success); }
 }
 
-/* GLOW EFFECT IF > 90% */
-.donut-chart.complete { animation: breath 2s infinite alternate; }
-@keyframes breath { 
-    from { box-shadow: 0 0 5px var(--success); } 
-    to { box-shadow: 0 0 20px var(--success), 0 0 40px rgba(39,174,96,0.3); } 
-}
-
-.donut-chart::before {
-  content: ""; position: absolute; width: 65px; height: 65px;
-  background: var(--panel-bg); border-radius: 50%;
-}
-
-.donut-inner-text {
-  position: relative; z-index: 2; font-family: 'Courier New', monospace;
-  font-weight: 900; font-size: 14px;
-}
-
-/* TOGGLE & SEARCH */
-.mode-toggle-area { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; }
-.toggle-pill { display: flex; background: var(--panel-bg); border: 1px solid var(--text-dim); padding: 2px; }
-.toggle-pill button { background: none; border: none; color: var(--text-dim); padding: 4px 12px; font-size: 9px; font-weight: bold; cursor: pointer; }
-.toggle-pill button.active { background: var(--accent); color: var(--bg-color); }
-
+/* SEARCH & TABLE */
 .search input { width: 100%; padding: 15px; background: var(--panel-bg); border: 1px solid var(--text-dim); color: var(--text-main); margin-bottom: 15px; box-sizing: border-box; outline: none; }
-
 .filter-tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
-.tab { padding: 10px 15px; background: transparent; border: 1px solid var(--text-dim); color: var(--text-dim); font-size: 10px; text-transform: uppercase; cursor: pointer; font-weight: bold; white-space: nowrap; }
+.tab { padding: 10px 15px; background: transparent; border: 1px solid var(--text-dim); color: var(--text-dim); font-size: 10px; text-transform: uppercase; cursor: pointer; font-weight: bold; }
 .tab.active { background: var(--accent); color: var(--bg-color); border-color: var(--accent); }
 
-/* TABLE */
 .table-wrapper { border: 1px solid var(--text-dim); overflow-x: auto; max-height: 500px; }
 table { width: 100%; border-collapse: collapse; font-size: 12px; }
 th { background: var(--table-head); color: var(--text-main); padding: 12px; text-align: left; text-transform: uppercase; position: sticky; top: 0; z-index: 10; }
@@ -180,22 +202,35 @@ td { padding: 15px 12px; border-bottom: 1px solid var(--text-dim); }
 .status-pill { padding: 4px 8px; font-size: 9px; font-weight: bold; border: 1px solid var(--text-dim); margin-right: 5px; border-radius: 4px; }
 .lunas { background: var(--accent); color: var(--bg-color); }
 
-.btn-pay { background: var(--success); color: white; border: none; padding: 6px 15px; font-size: 9px; cursor: pointer; font-weight: bold; }
-.btn-receipt { background: #444; color: white; border: none; padding: 6px 15px; font-size: 9px; cursor: pointer; font-weight: bold; }
+.btn-pay { background: var(--success); color: white; border: none; padding: 6px 15px; font-size: 9px; cursor: pointer; font-weight: bold; border-radius: 2px; }
+.btn-receipt { background: #444; color: white; border: none; padding: 6px 15px; font-size: 9px; cursor: pointer; font-weight: bold; border-radius: 2px; }
 
-/* MODALS & NOTIFY */
-#lunasNotify {
-  position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px);
-  background: var(--success); color: white; padding: 15px 30px; border-radius: 50px;
-  font-weight: bold; z-index: 9999; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  display: flex; align-items: center; gap: 10px; text-transform: uppercase; font-size: 14px;
-}
-#lunasNotify.show { transform: translateX(-50%) translateY(0); }
+/* MODAL QRIS */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); overflow-y: auto; }
+.modal-content { background-color: var(--panel-bg); margin: 2% auto; padding: 25px; border: 1px solid var(--accent); width: 90%; max-width: 400px; text-align: center; }
+.qris-container { background: white; padding: 15px; display: inline-block; margin: 15px 0; border-radius: 8px; line-height: 0; }
+.qris-img { width: 100%; max-width: 250px; height: auto; }
 
-.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
-.modal-content { background: var(--panel-bg); margin: 5% auto; padding: 25px; border: 1px solid var(--accent); width: 90%; max-width: 400px; text-align: center; }
+/* MUSIC PLAYER */
+.nav-utility { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.theme-switch { display: inline-block; height: 20px; position: relative; width: 40px; }
+.theme-switch input { display: none; }
+.slider { background-color: #333; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; border: 1px solid var(--text-dim); }
+.slider:before { background-color: white; bottom: 2px; content: ""; height: 14px; left: 3px; position: absolute; transition: .4s; width: 14px; border-radius: 50%; }
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(20px); background-color: var(--bg-color); }
 
+.music-player { background: var(--panel-bg); border: 1px solid var(--accent); padding: 5px 10px; display: flex; align-items: center; gap: 8px; }
+.music-btn { background: none; border: 1px solid var(--accent); color: var(--text-main); cursor: pointer; padding: 2px 8px; font-size: 9px; font-weight: bold; }
+.music-info { font-size: 8px; font-family: 'Courier New', monospace; text-transform: uppercase; letter-spacing: 1px; }
+
+/* KUITANSI */
 #receiptTemplate { position: absolute; left: -9999px; background: white; color: #000; padding: 40px; width: 450px; font-family: 'Courier New', monospace; border: 2px solid #000; }
+.rec-header { text-align: center; }
+.rec-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 16px; }
+
+/* CLOSE BUTTON */
+.close-btn { background: var(--accent); color: var(--bg-color); border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; margin-top: 15px; }
 </style>
 </head>
 
@@ -209,69 +244,82 @@ td { padding: 15px 12px; border-bottom: 1px solid var(--text-dim); }
   <div class="header-container">
     <header>
       <h1>BOLO GATEWAY</h1>
-      <div style="color: var(--text-dim); font-size: 10px; margin-top: 5px;">PASEBAN 80 • LIVE MONITORING</div>
+      <div style="color: var(--text-dim); font-size: 10px; margin-top: 5px;">PASEBAN 80 • SYSTEM MONITOR</div>
     </header>
-    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
-        <button id="themeToggleBtn" style="background:none; border:1px solid var(--text-dim); color:white; font-size:9px; cursor:pointer; padding:4px 8px;">🌓 THEME</button>
-        <button id="musicBtn" style="background:none; border:1px solid var(--accent); color:white; font-size:9px; cursor:pointer; padding:4px 8px;">▶️ PLAY MUSIC</button>
+    <div class="nav-utility">
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch">
+          <input type="checkbox" id="themeToggle" />
+          <div class="slider"></div>
+        </label>
+      </div>
+      <div class="music-player">
+        <span class="music-info" id="musicInfo">SYSTEM_AUDIO: IDLE</span>
+        <button class="music-btn" id="musicBtn">▶️ PLAY</button>
+      </div>
     </div>
   </div>
   
   <div class="ticker-wrapper">
     <div class="static-logo">⚡ FLASH INFO</div>
     <div class="ticker-content" id="newsTicker">
-      <span class="ticker-item" id="tickerStats">MEMUAT DATA SISTEM...</span>
-      <span class="ticker-item">TETAP SEMANGAT PASEBAN 80! • HUBUNGI ADMIN JIKA KENDALA</span>
+      <span class="ticker-item">SISTEM AKTIF: MONITORING PEMBAYARAN PASEBAN 80</span>
+      <span class="ticker-item" id="tickerStats">MEMUAT DATA TERBARU...</span>
+      <span class="ticker-item">PASEBAN NEON EDITION SEGERA DIPRODUKSI</span>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <div class="cheer-box">
-    <span>📢</span> <span id="dynamicCheer">Mulai memantau progres produksi...</span>
-  </div>
-
   <div class="mini-cards">
-    <div class="card" onclick="cardFilter('LUNAS', 1)">
-        <div class="card-label">✅ Paid</div>
-        <div class="card-value" id="cardLunas">0</div>
-    </div>
-    <div class="card" onclick="cardFilter('DP', 2)">
-        <div class="card-label">⏳ Deposit</div>
-        <div class="card-value" id="cardDP">0</div>
-    </div>
-    <div class="card" onclick="cardFilter('BELUM', 3)">
-        <div class="card-label">❌ Unpaid</div>
-        <div class="card-value" id="cardBelum">0</div>
-    </div>
+    <div class="card"><div class="card-label">✅ Paid</div><div class="card-value" id="cardLunas">0</div></div>
+    <div class="card"><div class="card-label">⏳ Deposit</div><div class="card-value" id="cardDP">0</div></div>
+    <div class="card"><div class="card-label">❌ Unpaid</div><div class="card-value" id="cardBelum">0</div></div>
   </div>
 
-  <div class="mode-toggle-area">
-      <span style="font-size: 9px; font-weight: bold; color: var(--text-dim);">CHART MODE:</span>
-      <div class="toggle-pill">
-          <button id="btnModeOrang" class="active" onclick="switchMode('ORANG')">👥 ORANG</button>
-          <button id="btnModeUang" onclick="switchMode('UANG')">💰 RUPIAH</button>
-      </div>
-  </div>
-
-  <div class="stats-container">
-    <div class="donut-chart" id="donutChart">
-      <div class="donut-inner-text" id="donutPercent">0%</div>
+  <div class="blueprint-panel">
+    <div class="blueprint-header" style="font-family: 'Courier New', monospace; font-size: 8px; color: var(--neon-orange); display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,140,0,0.2); padding-bottom: 5px; margin-bottom: 10px;">
+        <span>SYS_ID: PSB_NEON_MAP</span>
+        <span id="bpStatus">● READY</span>
     </div>
-    <div class="stat-details">
-      <div id="percText" style="font-weight: 900; font-family: 'Courier New', monospace;">📊 PROGRESS: 0%</div>
-      <div id="progressBar" style="color: var(--text-main); letter-spacing: 2px; font-size: 12px; margin: 5px 0;">░░░░░░░░░░░░░░░░░░░░</div>
-      <div style="font-size: 13px; font-family: 'Courier New', monospace;">
-        <div>💰 COLLECTED: <span id="displayBayar">Rp 0</span></div>
-        <div style="border-top: 1px dashed var(--text-dim); margin-top: 8px; padding-top: 8px;">
-          🚨 SISA: <span id="displaySisa">Rp 0</span>
+
+    <div class="blueprint-grid">
+        <div class="mockup-container" onclick="toggleBPStatus()">
+            <img src="https://i.postimg.cc/XGbDhffD/image-name.png" alt="Paseban 80 Mockup">
         </div>
-      </div>
+
+        <div class="spec-list">
+            <div class="spec-item" onclick="showBPInfo('Bahan Kaos Pria Grade A - Cotton Combed 24s')">
+                <span class="blueprint-label">MATERIAL</span>
+                <span class="blueprint-value">Combed 24s Black</span>
+            </div>
+            <div class="spec-item" onclick="showBPInfo('Sablon Plastisol')">
+                <span class="blueprint-label">PRINT</span>
+                <span class="blueprint-value">Plastisol</span>
+            </div>
+            <div class="spec-item" onclick="showBPInfo('Peta Paseban & Logo JKT12')">
+                <span class="blueprint-label">THEME</span>
+                <span class="blueprint-value">Jakarta Map</span>
+            </div>
+        </div>
     </div>
   </div>
 
-  <div class="search"><input type="text" id="search" placeholder="🔍 CARI NAMA IDENTITAS..."></div>
+  <div class="stat-panel">
+    <div id="percText" style="font-weight: bold;">📊 PROGRESS: 0%</div>
+    <div class="ascii-bar" id="progressBar">░░░░░░░░░░░░░░░░░░░░</div>
+    <div style="font-size: 14px; line-height: 1.8;">
+      <div>💰 COLLECTED: <span id="displayBayar">Rp 0</span></div>
+      <div style="border-top: 1px dashed var(--text-dim); margin-top: 10px; padding-top: 10px;">
+        🚨 OUTSTANDING: <span id="displaySisa">Rp 0</span>
+      </div>
+    </div>
+    <div class="motivation-box" id="logBox">
+        <span>[LOG_SISTEM]: </span><span id="motivationText">Inisialisasi sistem...</span>
+    </div>
+  </div>
 
+  <div class="search"><input type="text" id="search" placeholder="🔍 CARI NAMA..."></div>
   <div class="filter-tabs">
     <div class="tab active" onclick="filterByStatus('ALL', this)">🌐 ALL</div>
     <div class="tab" onclick="filterByStatus('LUNAS', this)">✅ PAID</div>
@@ -296,58 +344,102 @@ td { padding: 15px 12px; border-bottom: 1px solid var(--text-dim); }
 
 <div id="qrisModal" class="modal">
   <div class="modal-content">
-    <h3 style="margin:0;">💳 Pembayaran QRIS</h3>
-    <p id="payName" style="font-size: 14px; margin: 10px 0; color: var(--text-dim);"></p>
-    <p id="payAmount" style="font-weight: bold; color: var(--success); font-size: 1.5rem;"></p>
-    <img src="https://i.postimg.cc/HsW0byLR/IMG-20260416-WA0112.jpg" style="width:100%; max-width:250px; background:white; padding:10px; margin:15px 0;">
-    <button onclick="closeModal()" style="background:var(--accent); color:var(--bg-color); border:none; padding:15px; cursor:pointer; width:100%; font-weight:bold;">SELESAI</button>
+    <h3 style="margin:0; text-transform: uppercase;">💳 Pembayaran QRIS</h3>
+    <p id="payName" style="font-size: 14px; margin: 10px 0 5px; color: var(--text-dim);"></p>
+    <p id="payAmount" style="font-weight: bold; color: var(--success); font-size: 1.5rem; margin: 0;"></p>
+    <div class="qris-container">
+      <img src="https://i.postimg.cc/HsW0byLR/IMG-20260416-WA0112.jpg" class="qris-img" alt="QRIS">
+    </div>
+    <br>
+    <button class="close-btn" onclick="closeModal()">SELESAI & TUTUP</button>
   </div>
 </div>
 
 <div id="receiptTemplate">
-  <div style="text-align:center;"><h2>BOLO GATEWAY</h2><p>PASEBAN 80 - STRUK RESMI</p></div>
-  <hr>
-  <p>NAMA: <span id="recName"></span></p>
-  <p>UKURAN: <span id="recSize"></span></p>
-  <p>STATUS: LUNAS</p>
-  <hr>
-  <h3 id="recAmount"></h3>
+  <div class="rec-header">
+    <h2>BOLO GATEWAY</h2>
+    <p>PASEBAN 80 - OFFICIAL RECEIPT</p>
+  </div>
+  <div style="border-top: 2px dashed #000; margin: 15px 0;"></div>
+  <div class="rec-row"><span>NO. REF:</span> <span id="recRef" style="font-weight:bold;"></span></div>
+  <div class="rec-row"><span>TANGGAL:</span> <span id="recDate"></span></div>
+  <div style="border-top: 1px solid #ccc; margin: 15px 0;"></div>
+  <div class="rec-row"><span>NAMA:</span> <span id="recName"></span></div>
+  <div class="rec-row"><span>UKURAN:</span> <span id="recSize"></span></div>
+  <div class="rec-row"><span>STATUS:</span> <strong>LUNAS</strong></div>
+  <div style="border-top: 3px solid #000; margin: 15px 0;"></div>
+  <div class="rec-row" style="font-size:20px; font-weight:bold;">
+    <span>TOTAL:</span> <span id="recAmount"></span>
+  </div>
 </div>
 
-<audio id="bgMusic" loop><source src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3"></audio>
+<audio id="bgMusic" loop>
+  <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vThZYvi18OYaKUkbWNwHsX2e3IaCLZvYuFLfSt7fMx83lCLirj6-lQNDbDZgZPdJjLZ-sLmOKaAlXd6/pub?gid=133726198&single=true&output=csv";
-let currentChartMode = "ORANG", currentFilter = "ALL", knownLunas = new Set(), isFirstLoad = true;
+let currentFilter = "ALL";
+let knownLunas = new Set();
+let isFirstLoad = true;
 
-const music = document.getElementById('bgMusic'), musicBtn = document.getElementById('musicBtn');
-musicBtn.onclick = () => { if(music.paused){ music.play(); musicBtn.innerText="⏸️ PAUSE MUSIC"; } else { music.pause(); musicBtn.innerText="▶️ PLAY MUSIC"; }};
-
-const messages = [
-    "Mantap! Satu langkah lagi menuju lunas! 🚀",
-    "Paseban 80 emang solid, yuk dikit lagi target tercapai! 💎",
-    "Anonim: 'Semangat untuk admin produksinya!' ✨",
-    "Struk pembayaran sekarang bisa diunduh langsung 🧾",
-    "Donat chart otomatis berubah sesuai progres lho 🍩",
-    "Sedikit demi sedikit, lama-lama jadi lunas! 💪"
-];
-
-function updateCheer() {
-    document.getElementById('dynamicCheer').innerText = messages[Math.floor(Math.random() * messages.length)];
-}
-setInterval(updateCheer, 6000);
-
-function switchMode(mode) {
-    currentChartMode = mode;
-    document.getElementById('btnModeOrang').classList.toggle('active', mode === 'ORANG');
-    document.getElementById('btnModeUang').classList.toggle('active', mode === 'UANG');
-    loadData();
+// INTERACTIVE BLUEPRINT LOGIC
+function toggleBPStatus() {
+    const statusEl = document.getElementById('bpStatus');
+    const logText = document.getElementById("motivationText");
+    if (statusEl.innerText.includes("READY")) {
+        statusEl.innerText = "○ ANALYZING...";
+        statusEl.style.color = "#fff";
+        logText.innerText = "[SYSTEM]: Menganalisa pola peta Paseban pada mockup...";
+        setTimeout(() => {
+            statusEl.innerText = "● READY";
+            statusEl.style.color = "var(--neon-orange)";
+            logText.innerText = "[SYSTEM]: Analisa selesai. Konfigurasi kaos pria dikonfirmasi.";
+        }, 1500);
+    }
 }
 
+function showBPInfo(msg) {
+    const logText = document.getElementById("motivationText");
+    logText.innerText = `[BLUEPRINT_INFO]: ${msg}`;
+    const logBox = document.getElementById('logBox');
+    logBox.style.borderColor = "var(--neon-orange)";
+    setTimeout(() => { logBox.style.borderColor = ""; }, 500);
+}
+
+// THEME & SCROLL
+window.addEventListener('scroll', () => {
+    document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+document.getElementById('themeToggle').addEventListener('change', (e) => {
+    document.documentElement.setAttribute('data-theme', e.target.checked ? 'light' : 'dark');
+});
+
+// MUSIC
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+musicBtn.addEventListener('click', () => {
+    if (music.paused) {
+        music.play();
+        musicBtn.innerText = "⏸️ PAUSE";
+        document.getElementById('musicInfo').innerText = "SYSTEM_AUDIO: PLAYING";
+    } else {
+        music.pause();
+        musicBtn.innerText = "▶️ PLAY";
+        document.getElementById('musicInfo').innerText = "SYSTEM_AUDIO: PAUSED";
+    }
+});
+
+// CORE DATA LOAD
 function loadData() {
-  fetch(sheetURL).then(res => res.text()).then(csv => {
+  fetch(sheetURL)
+  .then(res => res.text())
+  .then(csv => {
     const rows = csv.split("\n").filter(row => row.trim() !== "").map(r => r.split(","));
-    let target = 0, masuk = 0, html = "", counts = { LUNAS: 0, DP: 0, BELUM: 0 };
+    let target = 0, masuk = 0, html = "";
+    let counts = { LUNAS: 0, DP: 0, BELUM: 0 };
+    let latestLunasFromSheet = "";
 
     rows.slice(1).forEach((r, i) => {
       let nama = r[0], ukuran = r[1], tot = parseInt(r[2])||0, bay = parseInt(r[3])||0, sisa = tot - bay;
@@ -356,6 +448,7 @@ function loadData() {
       counts[status]++;
       
       if(status === "LUNAS") {
+        latestLunasFromSheet = nama;
         if(!isFirstLoad && !knownLunas.has(nama)) {
             document.getElementById('notifyName').innerText = nama;
             document.getElementById('lunasNotify').classList.add('show');
@@ -366,58 +459,78 @@ function loadData() {
       }
 
       let isHidden = (currentFilter === "ALL" || currentFilter === status) ? "" : "style='display:none'";
-      let btn = (status === 'LUNAS') ? `<button class="btn-receipt" onclick="downloadReceipt('${nama}','${ukuran}',${bay})">🧾 STRUK</button>` : `<button class="btn-pay" onclick="openPay('${nama}',${sisa})">💳 BAYAR</button>`;
-      html += `<tr class="data-row" data-status="${status}" ${isHidden}><td><strong>${nama}</strong></td><td>${ukuran}</td><td>${sisa.toLocaleString('id-ID')}</td><td><span class="status-pill ${status.toLowerCase()}">${status}</span> ${btn}</td></tr>`;
+      let btn = (status === 'LUNAS') ? 
+          `<button class="btn-receipt" onclick="downloadReceipt('${nama}', '${ukuran}', ${bay}, ${i})">🧾 RECEIPT</button>` : 
+          `<button class="btn-pay" onclick="openPay('${nama}', ${sisa})">💳 PAY</button>`;
+
+      html += `<tr class="data-row" data-status="${status}" ${isHidden}>
+                <td><strong>${nama}</strong></td>
+                <td>${ukuran}</td>
+                <td>${sisa.toLocaleString('id-ID')}</td>
+                <td><span class="status-pill ${status.toLowerCase()}">${status}</span> ${btn}</td>
+              </tr>`;
     });
 
-    let percent = (currentChartMode === "ORANG") ? Math.round((counts.LUNAS / (counts.LUNAS+counts.DP+counts.BELUM)) * 100) : Math.round((masuk / target) * 100);
-
-    const donut = document.getElementById("donutChart");
-    donut.style.background = `conic-gradient(var(--success) ${percent}%, var(--table-head) ${percent}%)`;
-    donut.classList.toggle('complete', percent >= 90);
-
-    document.getElementById("donutPercent").innerText = `${percent}%`;
-    document.getElementById("percText").innerText = `📊 PROGRESS: ${percent}%`;
-    document.getElementById("progressBar").innerText = "█".repeat(Math.round(percent/5)) + "░".repeat(20 - Math.round(percent/5));
-    document.getElementById("tickerStats").innerText = `COLLECTED: Rp ${masuk.toLocaleString('id-ID')} | SISA: Rp ${(target-masuk).toLocaleString('id-ID')} | MODE: ${currentChartMode}`;
-
+    const percent = Math.round((masuk / target) * 100) || 0;
+    document.getElementById("tickerStats").innerText = `COLLECTED: Rp ${masuk.toLocaleString('id-ID')} | REMAIN: Rp ${(target-masuk).toLocaleString('id-ID')} | ${percent}%`;
+    
+    if (isFirstLoad && latestLunasFromSheet) {
+        document.getElementById("motivationText").innerText = `TRANSAKSI TERAKHIR: ${latestLunasFromSheet}`;
+    }
+    isFirstLoad = false;
     document.getElementById("cardLunas").innerText = counts.LUNAS;
     document.getElementById("cardDP").innerText = counts.DP;
     document.getElementById("cardBelum").innerText = counts.BELUM;
+    document.getElementById("percText").innerText = `📊 PROGRESS: ${percent}%`;
+    document.getElementById("progressBar").innerText = "█".repeat(Math.round(percent/5)) + "░".repeat(20 - Math.round(percent/5));
     document.getElementById("displayBayar").innerText = "Rp " + masuk.toLocaleString('id-ID');
     document.getElementById("displaySisa").innerText = "Rp " + (target - masuk).toLocaleString('id-ID');
     document.getElementById("tableBody").innerHTML = html;
-    isFirstLoad = false;
   });
 }
 
-function openPay(n, s) { document.getElementById("payName").innerText = n; document.getElementById("payAmount").innerText = "Sisa: Rp " + s.toLocaleString('id-ID'); document.getElementById("qrisModal").style.display = "block"; }
+function openPay(nama, sisa) {
+  document.getElementById("payName").innerText = "Pembayaran: " + nama;
+  document.getElementById("payAmount").innerText = "Rp " + sisa.toLocaleString('id-ID');
+  document.getElementById("qrisModal").style.display = "block";
+}
+
 function closeModal() { document.getElementById("qrisModal").style.display = "none"; }
-function downloadReceipt(n, u, b) {
-    document.getElementById("recName").innerText = n; document.getElementById("recSize").innerText = u;
-    document.getElementById("recAmount").innerText = "Rp " + b.toLocaleString('id-ID');
-    html2canvas(document.getElementById("receiptTemplate")).then(c => {
-        const l = document.createElement('a'); l.download = `Struk_${n}.png`; l.href = c.toDataURL(); l.click();
+
+function downloadReceipt(nama, ukuran, bayar, idx) {
+    const ref = `JKT-PSB-${(idx+1).toString().padStart(3,'0')}`;
+    document.getElementById("recName").innerText = nama;
+    document.getElementById("recSize").innerText = ukuran;
+    document.getElementById("recAmount").innerText = "Rp " + bayar.toLocaleString('id-ID');
+    document.getElementById("recDate").innerText = new Date().toLocaleDateString('id-ID');
+    document.getElementById("recRef").innerText = ref;
+    html2canvas(document.getElementById("receiptTemplate"), { scale: 2 }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `Receipt_${nama}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
     });
 }
-function cardFilter(status, tabIndex) { const tabs = document.querySelectorAll('.tab'); if (currentFilter === status) { filterByStatus('ALL', tabs[0]); } else { filterByStatus(status, tabs[tabIndex]); } }
-function filterByStatus(s, el) { currentFilter = s; document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); el.classList.add('active'); applyFilters(); }
+
+function filterByStatus(status, el) {
+  currentFilter = status;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  applyFilters();
+}
+
 function applyFilters() {
-  let v = document.getElementById("search").value.toLowerCase();
-  document.querySelectorAll(".data-row").forEach(r => {
-    const mF = currentFilter === "ALL" || r.dataset.status === currentFilter;
-    const mS = r.innerText.toLowerCase().includes(v);
-    r.style.display = (mF && mS) ? "" : "none";
+  let val = document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll(".data-row").forEach(row => {
+    const mF = currentFilter === "ALL" || row.dataset.status === currentFilter;
+    const mS = row.innerText.toLowerCase().includes(val);
+    row.style.display = (mF && mS) ? "" : "none";
   });
 }
 
-document.getElementById('themeToggleBtn').onclick = () => {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
-};
-document.getElementById("search").onkeyup = applyFilters;
-loadData(); setInterval(loadData, 10000);
-window.onscroll = () => document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 20);
+document.getElementById("search").addEventListener("keyup", applyFilters);
+loadData();
+setInterval(loadData, 10000);
 </script>
 </body>
 </html>
