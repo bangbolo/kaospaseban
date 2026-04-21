@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BOLO GATEWAY - Paseban Dashboard v2.8</title>
+<title>BOLO GATEWAY - Paseban Dashboard v2.8 Final</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -98,7 +98,7 @@ body {
   100% { transform: translate3d(-100%, 0, 0); }
 }
 
-/* MINI BLUEPRINT BUTTON (POJOK ATAS) */
+/* MINI BLUEPRINT BUTTON */
 .btn-blueprint-mini {
   background: transparent;
   border: 1px solid var(--neon-orange);
@@ -119,7 +119,7 @@ body {
   box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
 }
 
-/* MODAL BLUEPRINT FULLSCREEN */
+/* MODAL BLUEPRINT */
 .bp-modal {
   display: none;
   position: fixed;
@@ -164,15 +164,10 @@ body {
   text-transform: uppercase;
 }
 
-/* AUDIO VISUALIZER & UTILITY */
+/* UTILITY & VISUALIZER */
 .nav-utility { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 .music-player { background: var(--panel-bg); border: 1px solid var(--accent); padding: 5px 10px; display: flex; align-items: center; gap: 8px; }
-.visualizer-container {
-  display: none;
-  align-items: flex-end;
-  gap: 2px;
-  height: 12px;
-}
+.visualizer-container { display: none; align-items: flex-end; gap: 2px; height: 12px; }
 .visualizer-container.active { display: flex; }
 .bar { width: 2px; background: var(--accent); animation: equalize 1s infinite alternate; }
 .bar:nth-child(1) { height: 60%; animation-duration: 0.4s; }
@@ -180,10 +175,7 @@ body {
 .bar:nth-child(3) { height: 100%; animation-duration: 0.5s; }
 .bar:nth-child(4) { height: 50%; animation-duration: 0.3s; }
 
-@keyframes equalize {
-  0% { height: 10%; }
-  100% { height: 100%; }
-}
+@keyframes equalize { 0% { height: 10%; } 100% { height: 100%; } }
 
 /* NOTIFIKASI */
 #lunasNotify {
@@ -208,11 +200,6 @@ h1 { font-size: 1.3rem; margin: 0; text-transform: uppercase; letter-spacing: 3p
 .stat-panel { background: var(--panel-bg); padding: 20px; border: 2px solid var(--accent); margin-bottom: 20px; font-family: 'Courier New', monospace; }
 .ascii-bar { color: var(--text-main); letter-spacing: 2px; margin: 15px 0; font-size: 1.2rem; }
 
-.motivation-box { 
-    margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.05); 
-    border-left: 3px solid var(--warning); font-size: 12px; text-transform: uppercase;
-}
-
 /* SEARCH & TABLE */
 .search input { width: 100%; padding: 15px; background: var(--panel-bg); border: 1px solid var(--text-dim); color: var(--text-main); margin-bottom: 15px; box-sizing: border-box; outline: none; }
 .filter-tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
@@ -230,13 +217,17 @@ td { padding: 15px 12px; border-bottom: 1px solid var(--text-dim); }
 .btn-pay { background: var(--success); color: white; border: none; padding: 6px 15px; font-size: 9px; cursor: pointer; font-weight: bold; border-radius: 2px; }
 .btn-receipt { background: #444; color: white; border: none; padding: 6px 15px; font-size: 9px; cursor: pointer; font-weight: bold; border-radius: 2px; }
 
-/* QRIS MODAL */
+/* MODALS */
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); overflow-y: auto; }
-.modal-content { background-color: var(--panel-bg); margin: 2% auto; padding: 25px; border: 1px solid var(--accent); width: 90%; max-width: 400px; text-align: center; }
+.modal-content { background-color: var(--panel-bg); margin: 2% auto; padding: 25px; border: 1px solid var(--accent); width: 90%; max-width: 450px; text-align: center; }
 .qris-container { background: white; padding: 15px; display: inline-block; margin: 15px 0; border-radius: 8px; line-height: 0; }
 .qris-img { width: 100%; max-width: 250px; height: auto; }
 
-/* UTILITY COMPONENTS */
+/* KUITANSI TEMPLATE */
+#receiptTemplate { position: absolute; left: -9999px; background: white; color: #000; padding: 40px; width: 450px; font-family: 'Courier New', monospace; border: 2px solid #000; }
+.rec-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 16px; }
+
+/* THEME SWITCH */
 .theme-switch { display: inline-block; height: 16px; position: relative; width: 32px; }
 .theme-switch input { display: none; }
 .slider { background-color: #333; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; border: 1px solid var(--text-dim); }
@@ -244,12 +235,7 @@ td { padding: 15px 12px; border-bottom: 1px solid var(--text-dim); }
 input:checked + .slider { background-color: var(--accent); }
 input:checked + .slider:before { transform: translateX(18px); background-color: var(--bg-color); }
 .music-btn { background: none; border: 1px solid var(--accent); color: var(--text-main); cursor: pointer; padding: 2px 6px; font-size: 8px; font-weight: bold; }
-.music-info { font-size: 7px; font-family: 'Courier New', monospace; text-transform: uppercase; letter-spacing: 1px; }
-
-/* KUITANSI HIDDEN */
-#receiptTemplate { position: absolute; left: -9999px; background: white; color: #000; padding: 40px; width: 450px; font-family: 'Courier New', monospace; border: 2px solid #000; }
-.rec-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 16px; }
-.close-btn { background: var(--accent); color: var(--bg-color); border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+.close-btn { background: var(--accent); color: var(--bg-color); border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; margin-top: 15px; width: 100%; }
 </style>
 </head>
 
@@ -268,21 +254,14 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
     
     <div class="nav-utility">
       <button class="btn-blueprint-mini" onclick="openBlueprint()">📂 BLUEPRINT_V2.8</button>
-      
       <div style="display: flex; align-items: center; gap: 10px;">
           <div class="theme-switch-wrapper">
-            <label class="theme-switch">
-              <input type="checkbox" id="themeToggle" />
-              <div class="slider"></div>
-            </label>
+            <label class="theme-switch"><input type="checkbox" id="themeToggle" /><div class="slider"></div></label>
           </div>
           <div class="music-player">
-            <span class="music-info" id="musicInfo">AUDIO: IDLE</span>
+            <span class="music-info" id="musicInfo" style="font-size: 7px;">AUDIO: IDLE</span>
             <div class="visualizer-container" id="visualizer">
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
+              <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
             </div>
             <button class="music-btn" id="musicBtn">▶️ PLAY</button>
           </div>
@@ -310,11 +289,7 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
   <div id="blueprintModal" class="bp-modal">
     <div class="bp-modal-content">
         <button class="btn-close-bp" onclick="closeBlueprint()">← KEMBALI KE DASHBOARD</button>
-        
-        <h2 style="color: var(--neon-orange); border-bottom: 2px solid var(--neon-orange); padding-bottom: 10px; font-family: 'Courier New', monospace; margin-top: 0;">
-            TECHNICAL_BLUEPRINT: PASEBAN_NEON
-        </h2>
-
+        <h2 style="color: var(--neon-orange); border-bottom: 2px solid var(--neon-orange); padding-bottom: 10px; font-family: 'Courier New', monospace; margin-top: 0;">TECHNICAL_BLUEPRINT: PASEBAN_NEON</h2>
         <div class="bp-grid-detail">
             <div class="mockup-view" style="text-align: center;">
                 <img src="https://i.postimg.cc/wB4bYLy3/file-000000008eb0720b9977cd25e4f7a53d.png" style="width: 100%; max-width: 300px; filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.4));">
@@ -323,22 +298,10 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
             <div style="font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.6;">
                 <p style="color: var(--neon-orange); margin-top: 0;">[DATA_SHEET_SPEC]</p>
                 <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 10px; border-left: 2px solid var(--neon-orange); padding-left: 10px;">
-                        <strong style="display:block; font-size: 10px; color: var(--text-dim);">MATERIAL</strong>
-                        Cotton Combed 24s Premium Black
-                    </li>
-                    <li style="margin-bottom: 10px; border-left: 2px solid var(--neon-orange); padding-left: 10px;">
-                        <strong style="display:block; font-size: 10px; color: var(--text-dim);">INK SYSTEM</strong>
-                        High-Density Plastisol Print
-                    </li>
-                    <li style="margin-bottom: 10px; border-left: 2px solid var(--neon-orange); padding-left: 10px;">
-                        <strong style="display:block; font-size: 10px; color: var(--text-dim);">THEME</strong>
-                        Paseban District Map (Neon Edition)
-                    </li>
+                    <li style="margin-bottom: 10px; border-left: 2px solid var(--neon-orange); padding-left: 10px;"><strong style="display:block; font-size: 10px; color: var(--text-dim);">MATERIAL</strong>Cotton Combed 24s Premium Black</li>
+                    <li style="margin-bottom: 10px; border-left: 2px solid var(--neon-orange); padding-left: 10px;"><strong style="display:block; font-size: 10px; color: var(--text-dim);">INK SYSTEM</strong>High-Density Plastisol Print</li>
+                    <li style="margin-bottom: 10px; border-left: 2px solid var(--neon-orange); padding-left: 10px;"><strong style="display:block; font-size: 10px; color: var(--text-dim);">THEME</strong>Paseban District Map (Neon Edition)</li>
                 </ul>
-                <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid #444; font-size: 12px; color: #ccc;">
-                    <strong>NOTE:</strong> Sistem koordinat pada desain diambil dari pemetaan wilayah Paseban 80 dengan akurasi visual tinggi.
-                </div>
             </div>
         </div>
     </div>
@@ -349,12 +312,7 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
     <div class="ascii-bar" id="progressBar">░░░░░░░░░░░░░░░░░░░░</div>
     <div style="font-size: 14px;">
       <div>💰 COLLECTED: <span id="displayBayar">Rp 0</span></div>
-      <div style="border-top: 1px dashed var(--text-dim); margin-top: 10px; padding-top: 10px;">
-        🚨 OUTSTANDING: <span id="displaySisa">Rp 0</span>
-      </div>
-    </div>
-    <div class="motivation-box" id="logBox">
-        <span>[LOG_SISTEM]: </span><span id="motivationText">Inisialisasi...</span>
+      <div style="border-top: 1px dashed var(--text-dim); margin-top: 10px; padding-top: 10px;">🚨 OUTSTANDING: <span id="displaySisa">Rp 0</span></div>
     </div>
   </div>
 
@@ -368,9 +326,7 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
 
   <div class="table-wrapper">
     <table>
-      <thead>
-        <tr><th>👤 IDENTITY</th><th>📏 SIZE</th><th>💸 REMAIN</th><th>⚙️ ACTION</th></tr>
-      </thead>
+      <thead><tr><th>👤 IDENTITY</th><th>📏 SIZE</th><th>💸 REMAIN</th><th>⚙️ ACTION</th></tr></thead>
       <tbody id="tableBody"></tbody>
     </table>
   </div>
@@ -378,69 +334,68 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
 
 <div id="qrisModal" class="modal">
   <div class="modal-content">
-    <h3 style="margin:0; text-transform: uppercase;">💳 Pembayaran QRIS</h3>
+    <h3 style="margin:0; text-transform: uppercase; color: var(--accent);">💳 PEMBAYARAN QRIS</h3>
     <p id="payName" style="font-size: 14px; margin: 10px 0 5px; color: var(--text-dim);"></p>
     <p id="payAmount" style="font-weight: bold; color: var(--success); font-size: 1.5rem; margin: 0;"></p>
+    
     <div class="qris-container">
       <img src="https://i.postimg.cc/HsW0byLR/IMG-20260416-WA0112.jpg" class="qris-img" alt="QRIS">
-    </div><br>
+    </div>
+
+    <div style="text-align: left; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 11px; line-height: 1.5; border: 1px solid var(--text-dim);">
+      <strong style="color: var(--warning); display: block; margin-bottom: 5px;">PANDUAN PEMBAYARAN:</strong>
+      1. Screenshot kode QRIS di atas.<br>
+      2. Buka aplikasi M-Banking atau E-Wallet (Dana/OVO/GoPay/ShopeePay).<br>
+      3. Pilih menu <strong>"Scan"</strong> lalu unggah gambar QRIS dari galeri.<br>
+      4. Masukkan nominal sesuai <strong>Tagihan</strong> di atas.<br>
+      5. Klik <strong>"SELESAI & TUTUP"</strong> jika pembayaran sudah diproses.
+    </div>
     <button class="close-btn" onclick="closeModal()">SELESAI & TUTUP</button>
   </div>
 </div>
 
 <div id="receiptTemplate">
-  <div style="text-align: center;"><h2>BOLO GATEWAY</h2><p>PASEBAN 80 - OFFICIAL RECEIPT</p></div>
+  <div style="text-align: center;">
+    <h2 style="margin-bottom: 5px;">BOLO GATEWAY</h2>
+    <p style="margin-top: 0; font-size: 12px;">PASEBAN 80 - OFFICIAL RECEIPT</p>
+  </div>
   <div style="border-top: 2px dashed #000; margin: 15px 0;"></div>
   <div class="rec-row"><span>NO. REF:</span> <span id="recRef" style="font-weight:bold;"></span></div>
   <div class="rec-row"><span>TANGGAL:</span> <span id="recDate"></span></div>
   <div style="border-top: 1px solid #ccc; margin: 15px 0;"></div>
   <div class="rec-row"><span>NAMA:</span> <span id="recName"></span></div>
   <div class="rec-row"><span>UKURAN:</span> <span id="recSize"></span></div>
-  <div class="rec-row"><span>STATUS:</span> <strong>LUNAS</strong></div>
+  <div class="rec-row"><span>STATUS:</span> <strong style="text-decoration: underline;">LUNAS</strong></div>
   <div style="border-top: 3px solid #000; margin: 15px 0;"></div>
   <div class="rec-row" style="font-size:20px; font-weight:bold;"><span>TOTAL:</span> <span id="recAmount"></span></div>
+  
+  <div style="margin-top: 20px; font-size: 11px; font-style: italic; border: 1px solid #000; padding: 10px;">
+    <strong>KETERANGAN:</strong><br>
+    • Bukti ini sah sebagai tanda terima pembayaran kaos Paseban Neon Edition.<br>
+    • Harap simpan kuitansi digital ini untuk ditukarkan saat pengambilan barang.<br>
+    • Sistem mencatat transaksi ini secara otomatis dalam database Paseban 80.
+  </div>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgMusic" loop><source src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3" type="audio/mpeg"></audio>
 
 <script>
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vThZYvi18OYaKUkbWNwHsX2e3IaCLZvYuFLfSt7fMx83lCLirj6-lQNDbDZgZPdJjLZ-sLmOKaAlXd6/pub?gid=133726198&single=true&output=csv";
 let currentFilter = "ALL", knownLunas = new Set(), isFirstLoad = true;
 
-// BLUEPRINT MODAL FUNCTIONS
-function openBlueprint() {
-    document.getElementById("blueprintModal").style.display = "block";
-    document.body.style.overflow = "hidden";
-}
+function openBlueprint() { document.getElementById("blueprintModal").style.display = "block"; document.body.style.overflow = "hidden"; }
+function closeBlueprint() { document.getElementById("blueprintModal").style.display = "none"; document.body.style.overflow = "auto"; }
 
-function closeBlueprint() {
-    document.getElementById("blueprintModal").style.display = "none";
-    document.body.style.overflow = "auto";
-}
-
-// MUSIC LOGIC
 const music = document.getElementById('bgMusic'), musicBtn = document.getElementById('musicBtn'), visualizer = document.getElementById('visualizer');
 musicBtn.addEventListener('click', () => {
-    if (music.paused) {
-        music.play();
-        musicBtn.innerText = "⏸️";
-        document.getElementById('musicInfo').innerText = "AUDIO: ACTIVE";
-        visualizer.classList.add('active');
-    } else {
-        music.pause();
-        musicBtn.innerText = "▶️";
-        document.getElementById('musicInfo').innerText = "AUDIO: PAUSED";
-        visualizer.classList.remove('active');
-    }
+    if (music.paused) { music.play(); musicBtn.innerText = "⏸️"; visualizer.classList.add('active'); }
+    else { music.pause(); musicBtn.innerText = "▶️"; visualizer.classList.remove('active'); }
 });
 
-// DATA LOGIC
 function loadData() {
   fetch(sheetURL).then(res => res.text()).then(csv => {
     const rows = csv.split("\n").filter(row => row.trim() !== "").map(r => r.split(","));
-    let target = 0, masuk = 0, html = "", counts = { LUNAS: 0, DP: 0, BELUM: 0 }, latestLunas = "";
+    let target = 0, masuk = 0, html = "", counts = { LUNAS: 0, DP: 0, BELUM: 0 };
 
     rows.slice(1).forEach((r, i) => {
       let nama = r[0], ukuran = r[1], tot = parseInt(r[2])||0, bay = parseInt(r[3])||0, sisa = tot - bay;
@@ -449,7 +404,6 @@ function loadData() {
       counts[status]++;
       
       if(status === "LUNAS") {
-        latestLunas = nama;
         if(!isFirstLoad && !knownLunas.has(nama)) {
             document.getElementById('notifyName').innerText = nama;
             document.getElementById('lunasNotify').classList.add('show');
@@ -466,7 +420,6 @@ function loadData() {
 
     const percent = Math.round((masuk / target) * 100) || 0;
     document.getElementById("tickerStats").innerText = `COLLECTED: Rp ${masuk.toLocaleString('id-ID')} | ${percent}% COMPLETE`;
-    if (isFirstLoad && latestLunas) document.getElementById("motivationText").innerText = `LAST_TX: ${latestLunas}`;
     isFirstLoad = false;
     document.getElementById("cardLunas").innerText = counts.LUNAS;
     document.getElementById("cardDP").innerText = counts.DP;
@@ -495,7 +448,7 @@ function downloadReceipt(nama, ukuran, bayar, idx) {
     document.getElementById("recRef").innerText = ref;
     html2canvas(document.getElementById("receiptTemplate"), { scale: 2 }).then(canvas => {
         const link = document.createElement('a');
-        link.download = `Receipt_${nama}.png`;
+        link.download = `Kuitansi_${nama}.png`;
         link.href = canvas.toDataURL(); link.click();
     });
 }
