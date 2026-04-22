@@ -98,6 +98,66 @@ body {
   100% { transform: translate3d(-100%, 0, 0); }
 }
 
+/* WHATSAPP ADAPTIVE BUTTON */
+.wa-float-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+}
+
+.wa-float {
+  background-color: #25d366;
+  color: #fff;
+  border-radius: 50px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
+  white-space: nowrap;
+}
+
+.wa-float:hover, .wa-float.active {
+  width: 160px;
+}
+
+.wa-icon-container {
+  min-width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wa-icon { width: 25px; height: 25px; fill: currentColor; }
+
+.wa-text {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 5px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wa-float:hover .wa-text, .wa-float.active .wa-text {
+  opacity: 1;
+}
+
+@keyframes pulse-wa {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+.wa-float { animation: pulse-wa 2s infinite; }
+
 /* MINI BLUEPRINT BUTTON */
 .btn-blueprint-mini {
   background: transparent;
@@ -198,7 +258,7 @@ h1 { font-size: 1.3rem; margin: 0; text-transform: uppercase; letter-spacing: 3p
 .card-value { font-size: 16px; font-weight: 900; font-family: 'Courier New', monospace; }
 
 .stat-panel { background: var(--panel-bg); padding: 20px; border: 2px solid var(--accent); margin-bottom: 20px; font-family: 'Courier New', monospace; }
-.ascii-bar { color: var(--text-main); letter-spacing: 2px; margin: 15px 0; font-size: 1.2rem; }
+.ascii-bar { color: var(--text-main); letter-spacing: 2px; margin: 10px 0; font-size: 1.2rem; }
 
 /* SEARCH & TABLE */
 .search input { width: 100%; padding: 15px; background: var(--panel-bg); border: 1px solid var(--text-dim); color: var(--text-main); margin-bottom: 15px; box-sizing: border-box; outline: none; }
@@ -223,6 +283,18 @@ td { padding: 15px 12px; border-bottom: 1px solid var(--text-dim); }
 .qris-container { background: white; padding: 15px; display: inline-block; margin: 15px 0; border-radius: 8px; line-height: 0; }
 .qris-img { width: 100%; max-width: 250px; height: auto; }
 
+/* FOOTER STYLES */
+footer {
+  text-align: center;
+  padding: 25px 0;
+  margin-top: 30px;
+  border-top: 1px solid var(--text-dim);
+  color: var(--text-dim);
+  font-family: 'Inter', sans-serif;
+}
+.footer-copy { font-size: 11px; font-weight: bold; letter-spacing: 1px; color: var(--text-main); }
+.footer-ver { font-size: 9px; margin-top: 5px; text-transform: uppercase; opacity: 0.7; }
+
 /* KUITANSI TEMPLATE */
 #receiptTemplate { position: absolute; left: -9999px; background: white; color: #000; padding: 40px; width: 450px; font-family: 'Courier New', monospace; border: 2px solid #000; }
 .rec-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 16px; }
@@ -245,11 +317,25 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
   <span>🎉</span> <span id="notifyName">NAMA</span> BARU SAJA LUNAS!
 </div>
 
+<div class="wa-float-wrapper">
+  <a href="https://wa.me/6285117589508?text=Halo%20Admin%20Paseban,%20saya%20ingin%20memberikan%20Kritik%20/%20Saran." 
+     class="wa-float" 
+     id="waButton"
+     onclick="toggleWA(event)"
+     target="_blank" 
+     rel="noopener noreferrer">
+    <div class="wa-icon-container">
+      <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </div>
+    <span class="wa-text">KRITIK & SARAN</span>
+  </a>
+</div>
+
 <div class="header-wrapper" id="mainHeader">
   <div class="header-container">
     <header>
       <h1>BOLO GATEWAY</h1>
-      <div style="color: var(--text-dim); font-size: 10px; margin-top: 5px;">PASEBAN 80 • SYSTEM MONITOR</div>
+      <div style="color: var(--text-dim); font-size: 10px; margin-top: 5px;">PASEBAN 80 • PRODUCTION MONITOR</div>
     </header>
     
     <div class="nav-utility">
@@ -272,9 +358,36 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
   <div class="ticker-wrapper">
     <div class="static-logo">⚡ FLASH INFO</div>
     <div class="ticker-content" id="newsTicker">
-      <span class="ticker-item">SISTEM AKTIF: MONITORING PEMBAYARAN PASEBAN 80</span>
-      <span class="ticker-item" id="tickerStats">MEMUAT DATA TERBARU...</span>
-      <span class="ticker-item">PASEBAN NEON EDITION SEGERA DIPRODUKSI</span>
+      <span class="ticker-item">PROSES PRODUKSI: KAOS COTTON COMBED 24S BLACK</span>
+      <span class="ticker-item" id="tickerStats">ESTIMASI SELESAI: 06 MEI 2026</span>
+      <span class="ticker-item">PASEBAN NEON EDITION - HIGH DENSITY PLASTISOL</span>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: center; background: var(--bg-color); padding: 12px 0; border-bottom: 1px solid var(--text-dim);">
+    <div class="timer-container" style="text-align: center;">
+      <div style="font-size: 8px; color: var(--neon-orange); letter-spacing: 2px; margin-bottom: 5px; text-transform: uppercase; font-weight: bold;">Production Est. Time Remaining</div>
+      <div id="countdownTimer" style="display: flex; gap: 5px; font-family: 'Courier New', monospace;">
+        <div style="background: #1a1a1a; border: 1px solid var(--neon-orange); padding: 5px 8px; border-radius: 4px;">
+          <span id="days" style="color: var(--neon-orange); font-size: 18px; font-weight: 900;">00</span>
+          <div style="font-size: 7px; color: var(--text-dim);">DAYS</div>
+        </div>
+        <div style="color: var(--neon-orange); font-size: 18px; align-self: center;">:</div>
+        <div style="background: #1a1a1a; border: 1px solid var(--neon-orange); padding: 5px 8px; border-radius: 4px;">
+          <span id="hours" style="color: var(--neon-orange); font-size: 18px; font-weight: 900;">00</span>
+          <div style="font-size: 7px; color: var(--text-dim);">HRS</div>
+        </div>
+        <div style="color: var(--neon-orange); font-size: 18px; align-self: center;">:</div>
+        <div style="background: #1a1a1a; border: 1px solid var(--neon-orange); padding: 5px 8px; border-radius: 4px;">
+          <span id="minutes" style="color: var(--neon-orange); font-size: 18px; font-weight: 900;">00</span>
+          <div style="font-size: 7px; color: var(--text-dim);">MIN</div>
+        </div>
+        <div style="color: var(--neon-orange); font-size: 18px; align-self: center;">:</div>
+        <div style="background: #1a1a1a; border: 1px solid var(--neon-orange); padding: 5px 8px; border-radius: 4px;">
+          <span id="seconds" style="color: var(--neon-orange); font-size: 18px; font-weight: 900;">00</span>
+          <div style="font-size: 7px; color: var(--text-dim);">SEC</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -292,8 +405,8 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
         <h2 style="color: var(--neon-orange); border-bottom: 2px solid var(--neon-orange); padding-bottom: 10px; font-family: 'Courier New', monospace; margin-top: 0;">TECHNICAL_BLUEPRINT: PASEBAN_NEON</h2>
         <div class="bp-grid-detail">
             <div class="mockup-view" style="text-align: center;">
-                <img src="https://i.postimg.cc/wB4bYLy3/file-000000008eb0720b9977cd25e4f7a53d.png" style="width: 100%; max-width: 300px; filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.4));">
-                <p style="font-size: 10px; color: var(--text-dim); margin-top: 10px;">FIG 1.1: FRONT VISUALIZATION</p>
+                <img src="https://i.postimg.cc/wB4bYLy3/file-000000008eb0720b9977cd25e4f7a53d.png" style="width: 100%; max-width: 300px; filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.4));" alt="Black Men T-Shirt Design">
+                <p style="font-size: 10px; color: var(--text-dim); margin-top: 10px;">FIG 1.1: FRONT VISUALIZATION (BLACK COTTON COMBED)</p>
             </div>
             <div style="font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.6;">
                 <p style="color: var(--neon-orange); margin-top: 0;">[DATA_SHEET_SPEC]</p>
@@ -308,15 +421,21 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
   </div>
 
   <div class="stat-panel">
-    <div id="percText" style="font-weight: bold;">📊 PROGRESS: 0%</div>
+    <div id="percText" style="font-weight: bold;">📊 COLLECTION PROGRESS: 0%</div>
     <div class="ascii-bar" id="progressBar">░░░░░░░░░░░░░░░░░░░░</div>
-    <div style="font-size: 14px;">
+    <div style="font-size: 12px; margin-bottom: 15px;">
       <div>💰 COLLECTED: <span id="displayBayar">Rp 0</span></div>
-      <div style="border-top: 1px dashed var(--text-dim); margin-top: 10px; padding-top: 10px;">🚨 OUTSTANDING: <span id="displaySisa">Rp 0</span></div>
+      <div>🚨 OUTSTANDING: <span id="displaySisa">Rp 0</span></div>
+    </div>
+
+    <div style="border-top: 1px dashed var(--text-dim); padding-top: 15px;">
+      <div id="timePercText" style="font-weight: bold; font-size: 11px; color: var(--neon-orange);">⏳ PRODUCTION TIMELINE: 0%</div>
+      <div class="ascii-bar" id="timeProgressBar">░░░░░░░░░░░░░░░░░░░░</div>
+      <div style="font-size: 9px; color: var(--text-dim); text-transform: uppercase;">Est. Start: 16 Apr 2026 | Deadline: 06 Mei 2026</div>
     </div>
   </div>
 
-  <div class="search"><input type="text" id="search" placeholder="🔍 CARI NAMA..."></div>
+  <div class="search"><input type="text" id="search" placeholder="🔍 CARI NAMA PEMESAN..."></div>
   <div class="filter-tabs">
     <div class="tab active" onclick="filterByStatus('ALL', this)">🌐 ALL</div>
     <div class="tab" onclick="filterByStatus('LUNAS', this)">✅ PAID</div>
@@ -330,6 +449,12 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
       <tbody id="tableBody"></tbody>
     </table>
   </div>
+
+  <footer>
+    <div class="footer-copy">© 2026 PASEBAN 80. ALL RIGHTS RESERVED.</div>
+    <div class="footer-ver">Production Monitoring System v2.8</div>
+  </footer>
+
 </div>
 
 <div id="qrisModal" class="modal">
@@ -345,7 +470,7 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
     <div style="text-align: left; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 10px; font-size: 11px; line-height: 1.5; border: 1px solid var(--text-dim);">
       <strong style="color: var(--warning); display: block; margin-bottom: 5px;">PANDUAN PEMBAYARAN:</strong>
       1. Screenshot kode QRIS di atas.<br>
-      2. Buka aplikasi M-Banking atau E-Wallet (Dana/OVO/GoPay/ShopeePay).<br>
+      2. Buka aplikasi M-Banking atau E-Wallet.<br>
       3. Pilih menu <strong>"Scan"</strong> lalu unggah gambar QRIS dari galeri.<br>
       4. Masukkan nominal sesuai <strong>Tagihan</strong> di atas.<br>
       5. Klik <strong>"SELESAI & TUTUP"</strong> jika pembayaran sudah diproses.
@@ -371,20 +496,69 @@ input:checked + .slider:before { transform: translateX(18px); background-color: 
   
   <div style="margin-top: 20px; font-size: 11px; font-style: italic; border: 1px solid #000; padding: 10px;">
     <strong>KETERANGAN:</strong><br>
-    • Bukti ini sah sebagai tanda terima pembayaran kaos Paseban Neon Edition.<br>
-    • Harap simpan kuitansi digital ini untuk ditukarkan saat pengambilan barang.<br>
-    • Sistem mencatat transaksi ini secara otomatis dalam database Paseban 80.
+    • Bukti ini sah sebagai tanda terima pembayaran.<br>
+    • Harap simpan kuitansi digital ini untuk pengambilan barang.
   </div>
 </div>
 
 <audio id="bgMusic" loop><source src="https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3" type="audio/mpeg"></audio>
 
 <script>
+// KONFIGURASI TANGGAL PRODUKSI
+const startDate = new Date("April 16, 2026 00:00:00").getTime();
+const targetDate = new Date("May 6, 2026 23:59:59").getTime();
 const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vThZYvi18OYaKUkbWNwHsX2e3IaCLZvYuFLfSt7fMx83lCLirj6-lQNDbDZgZPdJjLZ-sLmOKaAlXd6/pub?gid=133726198&single=true&output=csv";
+
 let currentFilter = "ALL", knownLunas = new Set(), isFirstLoad = true;
+
+function updateTimer() {
+  const now = new Date().getTime();
+  
+  // 1. UPDATE MINI PROGRESS BAR WAKTU
+  const totalDuration = targetDate - startDate;
+  const elapsed = now - startDate;
+  let timePercent = Math.floor((elapsed / totalDuration) * 100);
+  if (timePercent < 0) timePercent = 0;
+  if (timePercent > 100) timePercent = 100;
+
+  const timeBar = document.getElementById("timeProgressBar");
+  if (timeBar) {
+    const filled = Math.round(timePercent / 5);
+    timeBar.innerText = "█".repeat(filled) + "░".repeat(20 - filled);
+    document.getElementById("timePercText").innerText = `⏳ PRODUCTION TIMELINE: ${timePercent}%`;
+  }
+
+  // 2. UPDATE COUNTDOWN TIMER
+  const distance = targetDate - now;
+  if (distance < 0) {
+    document.getElementById("countdownTimer").innerHTML = `<div style='color: #000; font-weight: bold; border: 1px solid var(--neon-orange); padding: 8px 20px; font-size: 12px; background: var(--neon-orange); width: 100%; letter-spacing: 1px; text-transform: uppercase;'>Status: Produksi Selesai & Siap Diambil</div>`;
+    return;
+  }
+  
+  const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((distance % (1000 * 60)) / 1000);
+  
+  document.getElementById("days").innerText = d.toString().padStart(2, '0');
+  document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+  document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+  document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
+}
 
 function openBlueprint() { document.getElementById("blueprintModal").style.display = "block"; document.body.style.overflow = "hidden"; }
 function closeBlueprint() { document.getElementById("blueprintModal").style.display = "none"; document.body.style.overflow = "auto"; }
+
+let waTimer;
+function toggleWA(event) {
+    const btn = document.getElementById('waButton');
+    if (!btn.classList.contains('active')) {
+        event.preventDefault();
+        btn.classList.add('active');
+        clearTimeout(waTimer);
+        waTimer = setTimeout(() => { btn.classList.remove('active'); }, 3000);
+    } 
+}
 
 const music = document.getElementById('bgMusic'), musicBtn = document.getElementById('musicBtn'), visualizer = document.getElementById('visualizer');
 musicBtn.addEventListener('click', () => {
@@ -419,12 +593,11 @@ function loadData() {
     });
 
     const percent = Math.round((masuk / target) * 100) || 0;
-    document.getElementById("tickerStats").innerText = `COLLECTED: Rp ${masuk.toLocaleString('id-ID')} | ${percent}% COMPLETE`;
     isFirstLoad = false;
     document.getElementById("cardLunas").innerText = counts.LUNAS;
     document.getElementById("cardDP").innerText = counts.DP;
     document.getElementById("cardBelum").innerText = counts.BELUM;
-    document.getElementById("percText").innerText = `📊 PROGRESS: ${percent}%`;
+    document.getElementById("percText").innerText = `📊 COLLECTION PROGRESS: ${percent}%`;
     document.getElementById("progressBar").innerText = "█".repeat(Math.round(percent/5)) + "░".repeat(20 - Math.round(percent/5));
     document.getElementById("displayBayar").innerText = "Rp " + masuk.toLocaleString('id-ID');
     document.getElementById("displaySisa").innerText = "Rp " + (target - masuk).toLocaleString('id-ID');
@@ -473,8 +646,11 @@ document.getElementById("themeToggle").addEventListener("change", (e) => documen
 window.addEventListener('scroll', () => document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 20));
 document.getElementById("search").addEventListener("keyup", applyFilters);
 
+setInterval(updateTimer, 1000);
+updateTimer();
 loadData();
 setInterval(loadData, 10000);
 </script>
+
 </body>
 </html>
